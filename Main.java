@@ -3,8 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 class Main {
-    private static final int ONE_GIB = 1073741824;
-    private static final int CHUNK = 134217728;
+    private static final long ONE_GIB = 1073741824;
+    private static final long CHUNK = 134217728;
     private static final  char[] symbolArray = initializeSymbolArray();
 
     private static char[] initializeSymbolArray() {
@@ -27,12 +27,12 @@ class Main {
     }
 
     public static void main(String[] args) {
-        int size;
+        long size;
 
         if (args.length <= 0) {
             size = ONE_GIB;
         } else {
-            size = ONE_GIB * Integer.valueOf(args[0]);
+            size = ONE_GIB * Long.valueOf(args[0]);
         }
 
         try {
@@ -42,11 +42,11 @@ class Main {
         }
     }
 
-    private static void createFile(int size) throws IOException {
+    private static void createFile(long size) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter("unsorted_file"));
 
-        int chunks = (int) Math.ceil(size / CHUNK);
-        for (int i = 0; i < chunks; i++) {
+        long chunks = (long) Math.ceil(size / CHUNK);
+        for (long i = 0; i < chunks; i++) {
             bw.write(createChunk());
         }
 
@@ -54,7 +54,7 @@ class Main {
     }
 
     private static char[] createChunk() {
-        char[] chunk = new char[CHUNK];
+        char[] chunk = new char[(int) CHUNK];
         int length = (int) (Math.random() * 12 + 4);
 
         for (int i = 0; i < CHUNK; i++) {
